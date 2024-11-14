@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Gambar</title>
+    <style>
+        /* Style dasar untuk pop up */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #000;
+            padding: 10px;
+            background-color: white;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup-container">
+        <div id="popup" class="popup">
+            <img id="popup-image" src="" alt="Popup Image" style="max-width: 500px; max-height: 500px;">
+        </div>
+    </div>
+
+    <script>
+        // Daftar gambar yang ingin ditampilkan
+        const images = [
+            'image1.jpg',  // Ganti dengan path atau URL gambar Anda
+            'image2.jpg',
+            'image3.jpg',
+            'image4.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        const popup = document.getElementById('popup');
+        const popupImage = document.getElementById('popup-image');
+
+        // Fungsi untuk menampilkan popup dengan gambar tertentu
+        function showPopup(imageSrc) {
+            popupImage.src = imageSrc;
+            popup.style.display = 'block';
+        }
+
+        // Fungsi untuk menyembunyikan popup
+        function hidePopup() {
+            popup.style.display = 'none';
+        }
+
+        // Fungsi untuk menjalankan popup berulang kali
+        function startPopupLoop() {
+            setInterval(() => {
+                // Menampilkan gambar pada popup
+                showPopup(images[currentImageIndex]);
+
+                // Setelah 900ms, popup akan disembunyikan
+                setTimeout(hidePopup, 900);
+
+                // Pindah ke gambar berikutnya
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+            }, 1000);
+        }
+
+        // Menjalankan loop popup saat halaman dimuat
+        window.onload = startPopupLoop;
+    </script>
+</body>
+</html>
